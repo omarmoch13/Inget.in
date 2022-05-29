@@ -19,14 +19,14 @@ export default function CalendarHeader() {
   }
   return (
     <header className="px-4 py-2 flex items-center">
-      <h1 className="mr-10 text-xl text-Black-500 font-bold ">
+      <h1 className="mr-10 text-xl text-Black-500 font-bold ff-londrina-solid">
         Inget.in
       </h1>
       <button
         onClick={handleReset}
-        className="border rounded py-2 px-4 mr-5"
+        className="border rounded py-2 px-4 mr-5 font-family-londrina-solid"
       >
-        Today
+        Hari ini
       </button>
       <button onClick={handlePrevMonth}>
         <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">

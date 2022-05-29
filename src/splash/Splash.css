@@ -1,0 +1,22 @@
+.container {
+  background-color: #5463ff;
+  height: 100vh;
+}
+
+.Text-splash {
+  font-size: 100pt;
+  font-family: londrina-solid;
+  color: #ececec;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150px;
+}
+
+.splash {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  padding-top: 20px;
+}

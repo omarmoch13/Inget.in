@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: londrina-solid;
+  src: url(/src/assets/LondrinaSolid-Regular.ttf);
+}

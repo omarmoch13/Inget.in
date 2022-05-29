@@ -3,7 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
 import ContextWrapper from "./context/ContextWrapper";
+
+import { Switch } from "@material-ui/core";
 ReactDOM.render(
   <React.StrictMode>
     <ContextWrapper>

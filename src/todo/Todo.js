@@ -8,29 +8,19 @@ import {
 import _ from "lodash";
 import { v4 } from "uuid";
 
-const item = {
-  id: v4(),
-  name: "Clean the house",
-};
-
-const item2 = {
-  id: v4(),
-  name: "Wash the car",
-};
-
-function Mob() {
+function Todo() {
   const [text, setText] = useState("");
   const [state, setState] = useState({
     todo: {
-      title: "Yang harus dilakukan",
-      items: [item, item2],
+      title: "",
+      items: [],
     },
     "in-progress": {
-      title: "Dalam Proses",
+      title: "",
       items: [],
     },
     done: {
-      title: "Selesai",
+      title: "",
       items: [],
     },
   });
@@ -47,15 +37,17 @@ function Mob() {
       return;
     }
 
+    // Creating a copy of item before removing it from state
     const itemCopy = {
       ...state[source.droppableId].items[source.index],
     };
 
     setState((prev) => {
       prev = { ...prev };
-
+      // Remove from previous items array
       prev[source.droppableId].items.splice(source.index, 1);
 
+      // Adding to new items array location
       prev[destination.droppableId].items.splice(
         destination.index,
         0,
@@ -71,7 +63,7 @@ function Mob() {
       return {
         ...prev,
         todo: {
-          title: "Todo",
+          title: "",
           items: [
             {
               id: v4(),
@@ -87,15 +79,18 @@ function Mob() {
   };
 
   return (
-    <div className="Mob">
-      <div>
+    <div className="App">
+      <div className="add-text">
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button onClick={addItem}>Add</button>
+        <div className="button">
+          <button onClick={addItem}>Tambahkan</button>
+        </div>
       </div>
+
       <DragDropContext onDragEnd={handleDragEnd}>
         {_.map(state, (data, key) => {
           return (
@@ -147,4 +142,4 @@ function Mob() {
   );
 }
 
-export default Mob;
+export default Todo;
