@@ -40,7 +40,7 @@ function App() {
           <Splash setLoading={setLoading} loading={loading} />
         </div>
       ) : (
-        <div className="flex flex-1  ">
+        <div style={{ display: "flex", height: "100%" }}>
           <Sidebar />
           <Router>
             <Routes>

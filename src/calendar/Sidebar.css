@@ -1,18 +1,11 @@
-.jadwal-logo {
-  margin-top: 30px;
-}
-
 .todo-logo {
-  margin-top: 300px;
+  margin-top: auto;
 }
 
-.catatan-logo {
-  margin-top: 30px;
-}
-
-.calendar-logo {
-  margin-top: 30px;
-}
-.profil-logo {
-  margin-top: 20px;
+.logos {
+  min-height: 92%;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 }
