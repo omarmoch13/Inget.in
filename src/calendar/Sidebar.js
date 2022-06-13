@@ -9,9 +9,9 @@ import "./Sidebar.css";
 export default function Sidebar() {
   return (
     <>
-      <aside className="top-0 left-0 bg-blue-500 w-[35vw] h-screen p-2">
+      <aside className="top-0 left-0 bg-blue-500 w-[35vw] h-vscreen p-2">
         <div className="profil-logo">
-          <a href="">
+          <a href="/Profil">
             <CgProfile color="white" size="2.1em" />
           </a>
         </div>

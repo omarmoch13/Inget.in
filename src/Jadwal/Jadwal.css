@@ -1,0 +1,151 @@
+.container-Jadwal {
+  background-color: #ffcf33;
+  height: 100vh;
+  width: 100%;
+}
+.container-wrapper {
+  align-items: center;
+  align-content: center;
+}
+
+.container-judul {
+  width: 20%;
+  margin-left: 40%;
+  background-color: rgba(255, 24, 24, 75%);
+
+  border-radius: 10px;
+  margin-top: 2%;
+  height: 1%;
+}
+
+.container-nama {
+  background-color: #5463ff;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 1%;
+  border-radius: 10px;
+}
+.container-judul ajudul {
+  font-size: 22px;
+  color: #ffcf33;
+  padding-left: 16%;
+  font-weight: bold;
+}
+.container-nama anama {
+  font-size: 20px;
+  color: #ffcf33;
+  padding-left: 2%;
+  font-weight: bold;
+}
+
+.container-nama akelas {
+  font-size: 20px;
+  color: #ffcf33;
+  padding-left: 20%;
+  font-weight: bold;
+}
+.fieldarea {
+  margin-left: 10%;
+}
+
+td {
+  /* padding-top: 2px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 6px; */
+  text-align: center;
+  border: 5px solid #ffcf33;
+  border-collapse: collapse;
+  border-radius: 10px;
+  max-height: 50px;
+  max-width: 100px;
+  white-space: pre-wrap;
+  word-wrap: break-word !important;
+}
+table {
+  width: 95%;
+  background-color: white;
+  border-spacing: 2%;
+  border: 5px solid #ffcf33;
+  border-collapse: collapse;
+  margin-top: 1%;
+  border-radius: 20px;
+  margin-left: 2.5%;
+}
+
+th {
+  background-color: #5463ff;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+  border: 5px solid #ffcf33;
+  border-collapse: collapse;
+  border-radius: 15px;
+  height: 10px;
+  width: 1%;
+}
+
+/* * {
+  margin: 0;
+  padding: 0;
+}
+.container-jadwal {
+  height: 100vh;
+  width: 100%;
+  background-color: #ffcf33;
+}
+
+.wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.wrapper-judul {
+  background-color: rgba(255, 24, 24, 75%);
+  margin-left: 40%;
+  margin-top: 2%;
+  width: 16%;
+  border-radius: 10px;
+}
+.wrapper-judul ajudul {
+  font-size: 22px;
+  color: #ffcf33;
+  padding-left: 14%;
+  font-weight: bold;
+}
+
+.wrapper .main {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.wrapper .form-container {
+  width: 500px;
+  height: 340px;
+  background-color: #e4e4e4;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.wrapper .form-container .btn {
+  width: 100%;
+}
+
+.wrapper .view-container {
+  width: 600px;
+  background-color: #e4e4e4;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-btn {
+  color: red;
+  cursor: pointer;
+}
+
+tbody {
+  margin-top: 25px;
+} */

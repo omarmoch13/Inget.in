@@ -1,0 +1,89 @@
+.wrapper-profil {
+  height: 100vh;
+  width: 100%;
+  background-color: #ffcf33;
+}
+
+.container-profil {
+  background-color: #5463ff;
+  width: 80%;
+  height: 90%;
+  margin-left: 10%;
+  margin-top: 2%;
+  border-radius: 15px;
+}
+.container-inside-judul {
+  align-items: center;
+  align-content: center;
+  padding-top: 3%;
+}
+.judul {
+  width: 15%;
+
+  margin-left: 40%;
+  background-color: whitesmoke;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #ffcf33;
+}
+.judul ajudul {
+  font-size: 20px;
+  padding-left: 25%;
+  text-align: center;
+  color: #5463ff;
+  font-weight: bold;
+}
+.profile-logo {
+  margin-left: 40%;
+  margin-top: 2%;
+}
+
+.column-judul {
+  display: grid;
+  margin-top: 3%;
+}
+
+.column2 {
+  margin-top: 2%;
+}
+.column1 a1,
+a2 {
+  font-size: 20px;
+
+  color: #ffcf33;
+  font-weight: bold;
+}
+.column1 a1 {
+  margin-left: 10%;
+}
+.column1 a2 {
+  margin-left: 30%;
+}
+
+.column2 a3,
+a4 {
+  font-size: 20px;
+  font-weight: bold;
+
+  color: #ffcf33;
+}
+.column2 a3 {
+  margin-left: 10%;
+}
+.column2 a4 {
+  margin-left: 24%;
+}
+.margin {
+  margin-left: 100px;
+  border-radius: 5px;
+  width: 20%;
+}
+.textfield {
+  margin-top: 4%;
+  margin-left: 10%;
+}
+.field {
+  width: 85%;
+  background-color: white;
+  border-radius: 5px;
+}

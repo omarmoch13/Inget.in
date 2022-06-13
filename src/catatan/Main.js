@@ -6,6 +6,14 @@ import DiaryItem from "./CatatanItem";
 import { Modal } from "react-bootstrap";
 import "./Main.css";
 
+// const Main = () => {
+//   return (
+//     <div>
+//       <h1>Catatan Harian</h1>
+//     </div>
+//   );
+// };
+// export default Main;
 export class Main extends Component {
   constructor() {
     super();

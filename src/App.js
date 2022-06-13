@@ -15,6 +15,7 @@ import { store, persistor } from "./catatan/Store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Main from "./catatan/Main";
+import Profil from "./Profil/Profil";
 
 import {
   BrowserRouter as Router,
@@ -63,7 +64,6 @@ function App() {
                   <>
                     {" "}
                     <div className=" h-screen flex flex-col flex-1 bg-yellow-300 ">
-                      <Headbar />
                       <Todo />
                     </div>
                   </>
@@ -87,6 +87,7 @@ function App() {
                 }
               />
               <Route exact path="/Jadwal" element={<Jadwal />} />
+              <Route exact path="/Profil" element={<Profil />} />
             </Routes>
           </Router>
         </div>
