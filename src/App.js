@@ -16,6 +16,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Main from "./catatan/Main";
 import Profil from "./Profil/Profil";
+import Login from "./login/Login";
+import Register from "./register/Register";
 
 import {
   BrowserRouter as Router,
@@ -44,9 +46,11 @@ function App() {
           <Sidebar />
           <Router>
             <Routes>
+              <Route exact path="/" element={<Login />} />
+              <Route exact path="/Register" element={<Register />} />
               <Route
                 exact
-                path="/"
+                path="/Kalender"
                 element={
                   <>
                     {" "}

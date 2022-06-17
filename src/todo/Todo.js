@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
+import { BsPlusSquare } from "react-icons/bs";
+import Modal from "./Modal";
 import "./Todo.css";
 import {
   DragDropContext,
@@ -78,11 +79,34 @@ function Todo() {
 
     setText("");
   };
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="Container">
       <div className="headbar">
         <div className="Text-headbar">
+          <a0>
+            <button onClick={() => setIsOpen(true)}>
+              <BsPlusSquare
+                color="rgba(255, 207, 51, 100%)"
+                size="1.8em"
+              />
+            </button>
+          </a0>
+          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+            <div className="add-text">
+              <input
+                type="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+              <div className="button">
+                <button onClick={addItem}>
+                  <aBUTTON>Tambahkan</aBUTTON>
+                </button>
+              </div>
+            </div>
+          </Modal>
+
           <a1>Aktifitas</a1>
           <a2>Proses</a2>
           <a3>Selesai</a3>

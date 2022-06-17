@@ -1,0 +1,35 @@
+.OVERLAY_STYLES {
+  position: "fixed";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(13, 22, 12, 10%);
+  z-index: 1000;
+  position: grid;
+}
+.MODAL_STYLES {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #5463ff;
+  padding: 50px;
+  z-index: 1000;
+  border-radius: 15px;
+  display: grid;
+}
+.button-tutup {
+  background-color: red;
+  border-radius: 15px;
+  margin-top: 1%;
+  width: 47%;
+  font-weight: bold;
+  margin-left: 4px;
+}
+.button-tutup atutup {
+  font-weight: bold;
+
+  padding-left: 25px;
+  font-size: 12pt;
+}

@@ -19,7 +19,7 @@
 .droppable-col {
   width: 100%;
   background-color: #5463ff;
-  padding: 2% 2% 0 2%;
+  padding: 1% 1% 0 1%;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
   border: 2px solid white;
   padding: 1%;
   border-radius: 7px;
-  max-height: 90%;
+  max-height: 70%;
   max-width: 100%;
 }
 .headbar {
@@ -47,27 +47,39 @@
   background-color: rgba(255, 207, 51, 70%);
 }
 
-.Text-headbar {
-  padding-top: 10px;
-}
+.Text-headbar a0 {
+  margin-left: 0.5%;
 
+  position: fixed;
+  background-color: #5463ff;
+  border-radius: 5px;
+  width: 4%;
+  padding-left: 0.8%;
+  margin-top: 0.2%;
+  padding-top: 0.5%;
+}
 .Text-headbar a1 {
   color: black;
   font-size: 20px;
-  margin-left: 13%;
+  margin-left: 12%;
   font-weight: bold;
+  position: fixed;
+  padding-top: 10px;
 }
 .Text-headbar a2 {
   color: black;
   font-size: 20px;
-  margin-left: 26%;
+  margin-left: 45%;
+  position: fixed;
   font-weight: bold;
+  padding-top: 10px;
 }
 .Text-headbar a3 {
   color: black;
   font-size: 20px;
-  margin-left: 30%;
+  margin-left: 80%;
   font-weight: bold;
+  padding-top: 10px;
 }
 
 .item.dragging {
@@ -75,371 +87,20 @@
 }
 
 .button {
-  background-color: #5463ff;
+  background-color: rgba(255, 207, 51, 100%);
   border-radius: 15px;
-  margin-top: 1%;
+  margin-top: 5%;
+  width: 50%;
+  font-weight: bold;
+  position: grid;
+}
+.button aBUTTON {
+  font-weight: bold;
+  font-size: 12pt;
+  padding-left: 6px;
 }
 
 .add-text {
   margin-right: 2%;
   margin-left: 2%;
-}
-@media only screen and (max-width: 1080px) {
-  * {
-    box-sizing: border-box;
-  }
-
-  .App {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-  }
-
-  .App .column {
-    width: 40%;
-    max-width: 75%;
-    height: 100%;
-    max-height: 100%;
-  }
-
-  .droppable-col {
-    width: 100%;
-    background-color: #5463ff;
-    padding: 2% 2% 0 2%;
-    border-radius: 7px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    max-height: 100%;
-    max-width: 100%;
-  }
-  .droppable-col::-webkit-scrollbar {
-    display: none;
-  }
-  .item {
-    margin-bottom: 5%;
-
-    background-color: #5463ff;
-    color: white;
-    border: 2px solid white;
-    padding: 1%;
-    border-radius: 7px;
-    max-height: 90%;
-    max-width: 100%;
-  }
-  .headbar {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(255, 207, 51, 70%);
-    /* background-color: blue; */
-  }
-
-  .Text-headbar {
-    padding-top: 10px;
-  }
-
-  .Text-headbar a1 {
-    color: black;
-    font-size: 20px;
-    margin-left: 13%;
-    font-weight: bold;
-  }
-  .Text-headbar a2 {
-    color: black;
-    font-size: 20px;
-    margin-left: 24%;
-    font-weight: bold;
-  }
-  .Text-headbar a3 {
-    color: black;
-    font-size: 20px;
-    margin-left: 27%;
-    font-weight: bold;
-  }
-
-  .item.dragging {
-    background-color: white;
-  }
-
-  .button {
-    background-color: #5463ff;
-    border-radius: 15px;
-    margin-top: 1%;
-  }
-
-  .add-text {
-    margin-right: 2%;
-    margin-left: 2%;
-  }
-}
-
-@media only screen and (max-width: 680px) {
-  * {
-    box-sizing: border-box;
-  }
-
-  .App {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-  }
-
-  .App .column {
-    width: 40%;
-    max-width: 75%;
-    height: 100%;
-    max-height: 100%;
-  }
-
-  .droppable-col {
-    width: 100%;
-    background-color: #5463ff;
-    padding: 2% 2% 0 2%;
-    border-radius: 7px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    max-height: 100%;
-    max-width: 100%;
-  }
-  .droppable-col::-webkit-scrollbar {
-    display: none;
-  }
-  .item {
-    margin-bottom: 5%;
-
-    background-color: #5463ff;
-    color: white;
-    border: 2px solid white;
-    padding: 1%;
-    border-radius: 7px;
-    max-height: 90%;
-    max-width: 100%;
-  }
-  .headbar {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(255, 207, 51, 70%);
-    /* background-color: blue; */
-  }
-
-  .Text-headbar {
-    padding-top: 10px;
-  }
-
-  .Text-headbar a1 {
-    color: black;
-    font-size: 13px;
-    margin-left: 13%;
-    font-weight: bold;
-  }
-  .Text-headbar a2 {
-    color: black;
-    font-size: 13px;
-    margin-left: 23%;
-    font-weight: bold;
-  }
-  .Text-headbar a3 {
-    color: black;
-    font-size: 13px;
-    margin-left: 28%;
-    font-weight: bold;
-  }
-
-  .item.dragging {
-    background-color: white;
-  }
-
-  .button {
-    background-color: #5463ff;
-    border-radius: 15px;
-    margin-top: 1%;
-  }
-
-  .add-text {
-    margin-right: 2%;
-    margin-left: 2%;
-  }
-}
-
-@media only screen and (max-width: 720px) {
-  * {
-    box-sizing: border-box;
-  }
-
-  .App {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-  }
-
-  .App .column {
-    width: 40%;
-    max-width: 75%;
-    height: 100%;
-    max-height: 100%;
-  }
-
-  .droppable-col {
-    width: 100%;
-    background-color: #5463ff;
-    padding: 2% 2% 0 2%;
-    border-radius: 7px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    max-height: 100%;
-    max-width: 100%;
-  }
-  .droppable-col::-webkit-scrollbar {
-    display: none;
-  }
-  .item {
-    margin-bottom: 5%;
-
-    background-color: #5463ff;
-    color: white;
-    border: 2px solid white;
-    padding: 1%;
-    border-radius: 7px;
-    max-height: 90%;
-    max-width: 100%;
-  }
-  .headbar {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(255, 207, 51, 70%);
-    /* background-color: blue; */
-  }
-
-  .Text-headbar {
-    padding-top: 10px;
-  }
-
-  .Text-headbar a1 {
-    color: black;
-    font-size: 15px;
-    margin-left: 12%;
-    font-weight: bold;
-  }
-  .Text-headbar a2 {
-    color: black;
-    font-size: 15px;
-    margin-left: 24%;
-    font-weight: bold;
-  }
-  .Text-headbar a3 {
-    color: black;
-    font-size: 15px;
-    margin-left: 26%;
-    font-weight: bold;
-  }
-
-  .item.dragging {
-    background-color: white;
-  }
-
-  .button {
-    background-color: #5463ff;
-    border-radius: 15px;
-    margin-top: 1%;
-  }
-
-  .add-text {
-    margin-right: 2%;
-    margin-left: 2%;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  * {
-    box-sizing: border-box;
-  }
-
-  .App {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-  }
-
-  .App .column {
-    width: 40%;
-    max-width: 75%;
-    height: 100%;
-    max-height: 100%;
-  }
-
-  .droppable-col {
-    width: 100%;
-    background-color: #5463ff;
-    padding: 2% 2% 0 2%;
-    border-radius: 7px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    max-height: 100%;
-    max-width: 100%;
-  }
-  .droppable-col::-webkit-scrollbar {
-    display: none;
-  }
-  .item {
-    margin-bottom: 5%;
-
-    background-color: #5463ff;
-    color: white;
-    border: 2px solid white;
-    padding: 1%;
-    border-radius: 7px;
-    max-height: 90%;
-    max-width: 100%;
-  }
-  .headbar {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(255, 207, 51, 70%);
-    /* background-color: blue; */
-  }
-
-  .Text-headbar {
-    padding-top: 10px;
-  }
-
-  .Text-headbar a1 {
-    color: black;
-    font-size: 13px;
-    margin-left: 12%;
-    font-weight: bold;
-  }
-  .Text-headbar a2 {
-    color: black;
-    font-size: 13px;
-    margin-left: 22%;
-    font-weight: bold;
-  }
-  .Text-headbar a3 {
-    color: black;
-    font-size: 13px;
-    margin-left: 23%;
-    font-weight: bold;
-  }
-
-  .item.dragging {
-    background-color: white;
-  }
-
-  .button {
-    background-color: #5463ff;
-    border-radius: 15px;
-    margin-top: 1%;
-  }
-
-  .add-text {
-    margin-right: 2%;
-    margin-left: 2%;
-  }
 }
