@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
+import axios from "axios";
 
 const labelsClasses = [
   "indigo",
@@ -30,7 +31,7 @@ export default function EventModal() {
       : labelsClasses[0]
   );
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const calendarEvent = {
       title,
@@ -44,7 +45,6 @@ export default function EventModal() {
     } else {
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }
-
     setShowEventModal(false);
   }
   return (

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsPlusSquare } from "react-icons/bs";
 import Modal from "./Modal";
+import axios from "axios";
 import "./Todo.css";
 import {
   DragDropContext,
@@ -9,23 +10,46 @@ import {
 } from "react-beautiful-dnd";
 import _ from "lodash";
 import { v4 } from "uuid";
+import Item from "antd/lib/list/Item";
 
 function Todo() {
   const [text, setText] = useState("");
   const [state, setState] = useState({
     todo: {
-      title: "",
       items: [],
     },
     "in-progress": {
-      title: "",
       items: [],
     },
     done: {
-      title: "",
       items: [],
     },
   });
+  const [data, setData] = useState({ deskripsi: "" });
+  const [error, setError] = useState("");
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.deskripsi]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:4000/api/todo";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("id", res.data.id);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   const handleDragEnd = ({ destination, source }) => {
     if (!destination) {
@@ -65,11 +89,11 @@ function Todo() {
       return {
         ...prev,
         todo: {
-          title: "",
           items: [
             {
               id: v4(),
               name: text,
+              onchange: handleChange,
             },
             ...prev.todo.items,
           ],
@@ -93,18 +117,20 @@ function Todo() {
             </button>
           </a0>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <div className="add-text">
-              <input
-                type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-              <div className="button">
-                <button onClick={addItem}>
-                  <aBUTTON>Tambahkan</aBUTTON>
-                </button>
+            <form onSubmit={handleSubmit}>
+              <div className="add-text">
+                <input
+                  type="text"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <div className="button">
+                  <button onClick={addItem}>
+                    <aBUTTON>Tambahkan</aBUTTON>
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
           </Modal>
 
           <a1>Aktifitas</a1>

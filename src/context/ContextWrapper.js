@@ -6,9 +6,15 @@ import React, {
 } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
+import axios from "axios";
 
+let types;
 function savedEventsReducer(state, { type, payload }) {
+  types = type;
   switch (type) {
+    case "api":
+      state = state.concat(payload);
+      return state;
     case "push":
       return [...state, payload];
     case "update":
@@ -21,9 +27,24 @@ function savedEventsReducer(state, { type, payload }) {
       throw new Error();
   }
 }
-function initEvents() {
-  const storageEvents = localStorage.getItem("savedEvents");
-  const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+
+async function initEvents() {
+  // const storageEvents = localStorage.getItem("savedEvents");
+  // const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+  let parsedEvents = [];
+  // const fetchData = async () => {
+  //   const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+  //     "id"
+  //   )}`;
+  //   const response = await axios.get(url);
+  //   parsedEvents = response.data.dataKalender;
+  // };
+  // fetchData();
+  const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+    "id"
+  )}`;
+  const response = await axios.get(url);
+  parsedEvents = response.data.dataKalender;
   return parsedEvents;
 }
 
@@ -36,21 +57,47 @@ export default function ContextWrapper(props) {
   const [labels, setLabels] = useState([]);
   const [savedEvents, dispatchCalEvent] = useReducer(
     savedEventsReducer,
-    [],
-    initEvents
+    []
   );
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+        "id"
+      )}`;
+      const response = await axios.get(url);
+      if (response.data.dataKalender !== undefined) {
+        dispatchCalEvent({
+          type: "api",
+          payload: response.data.dataKalender,
+        });
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(savedEvents);
   const filteredEvents = useMemo(() => {
-    return savedEvents.filter((evt) =>
-      labels
-        .filter((lbl) => lbl.checked)
-        .map((lbl) => lbl.label)
-        .includes(evt.label)
-    );
+    if (savedEvents.length !== 0) {
+      return savedEvents.filter((evt) =>
+        labels
+          .filter((lbl) => lbl.checked)
+          .map((lbl) => lbl.label)
+          .includes(evt.label)
+      );
+    }
+    return [];
   }, [savedEvents, labels]);
 
   useEffect(() => {
-    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
+    const fetchData = async () => {
+      const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+        "id"
+      )}`;
+      let body = { dataKalender: savedEvents };
+      await axios.post(url, body);
+    };
+    if (types == "push" || types == "update" || types == "delete")
+      fetchData();
   }, [savedEvents]);
 
   useEffect(() => {

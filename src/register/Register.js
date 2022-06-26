@@ -1,11 +1,46 @@
 import React from "react";
-
+import { useState } from "react";
 import "./Register.css";
-import { AiOutlineUser } from "react-icons/ai";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const history = useNavigate();
+  const [data, setData] = useState({
+    username: "",
+    name: "",
+    email: "",
+    password: "",
+
+    nomor: "-",
+    umur: "-",
+    cerita: "-",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(data);
+    try {
+      const url = "http://localhost:4000/api/users";
+      const { data: res } = await axios.post(url, data);
+      navigate("/Login");
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+        console.log(error.response);
+      }
+    }
+  };
   return (
     <div className="container-login">
       <div className="container-wrap-login">
@@ -17,50 +52,52 @@ export default function Register() {
             <alogin>REGISTER</alogin>
           </div>
           <div className="textfield-login">
-            <form action="/Login" method="POST">
+            <form onSubmit={handleSubmit}>
               <input
-                placeholder="Nama"
-                class="input-box"
+                onChange={handleChange}
+                value={data.username}
+                required
+                placeholder="username"
                 type="text"
-                name="identifier"
-                className="input-nama"
-              />
-              <br></br>
-              <input
-                placeholder="Email"
-                class="input-box"
-                type="text"
-                name="identifier"
+                name="username"
                 className="input-Email"
               />
               <br></br>
               <input
-                placeholder="Username"
-                class="input-box"
+                onChange={handleChange}
+                value={data.name}
+                required
+                placeholder="name"
                 type="text"
-                name="identifier"
+                name="name"
+                className="input-Email"
+              />
+              <br></br>
+              <input
+                onChange={handleChange}
+                value={data.email}
+                required
+                placeholder="Email"
+                type="text"
+                name="email"
                 className="input-username"
               />
 
               <br></br>
               <input
+                onChange={handleChange}
+                value={data.password}
+                required
                 placeholder="Password"
-                class="input-box"
                 type="text"
-                name="identifier"
+                name="password"
                 className="input-password"
               />
+              {error && <div className="error_msg">{error}</div>}
+              <div className="button-login">
+                <button className="button-regis">Buat Akun</button>
+              </div>
             </form>
-          </div>
-          <div className="button-login">
-            <button
-              className="button-regis"
-              onClick={() => {
-                history("/");
-              }}
-            >
-              Buat Akun
-            </button>
           </div>
         </div>
       </div>

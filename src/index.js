@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 
 import ContextWrapper from "./context/ContextWrapper";
 
-import { Switch } from "@material-ui/core";
 ReactDOM.render(
   <React.StrictMode>
     <ContextWrapper>

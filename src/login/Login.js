@@ -1,11 +1,34 @@
-import { TextField } from "@mui/material";
 import React from "react";
+import axios from "axios";
+import { useState } from "react";
 import "./Login.css";
-import { AiOutlineUser } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 
-export default function Login() {
-  const history = useNavigate();
+export default function Login({ setUserId }) {
+  const [data, setData] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:4000/api/auth";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("id", res.data.id);
+      window.location = "/";
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
   return (
     <div className="container-login">
       <div className="container-wrap-login">
@@ -17,44 +40,35 @@ export default function Login() {
             <alogin>LOGIN</alogin>
           </div>
           <div className="textfield-login">
-            <form action="/Login" method="POST">
+            <form onSubmit={handleSubmit}>
               <br></br>
               <input
                 placeholder="Username"
-                class="input-box"
-                type="text"
-                name="identifier"
+                type="username"
+                onChange={handleChange}
+                value={data.username}
+                name="username"
+                required
                 className="input-login"
               />
 
               <br></br>
               <input
                 placeholder="Password"
-                class="input-box"
-                type="text"
-                name="identifier"
+                type="password"
+                required
+                onChange={handleChange}
+                value={data.password}
+                name="password"
                 className="input-password"
               />
+              {error && <div className="error_msg">{error}</div>}
+              <button className="button-masuk" type="submit">
+                Masuk
+              </button>
             </form>
           </div>
-          <div className="button-login">
-            <button
-              className="button-masuk"
-              onClick={() => {
-                history("/Kalender");
-              }}
-            >
-              Masuk
-            </button>
-            <button
-              className="button-buat"
-              onClick={() => {
-                history("/Register");
-              }}
-            >
-              buat akun
-            </button>
-          </div>
+          <a href="/Register">Buat Akun</a>
         </div>
       </div>
     </div>

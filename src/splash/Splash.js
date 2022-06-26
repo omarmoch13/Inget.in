@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactLoading from "react-loading";
 import "./Splash.css";
 
-function Splash({ setLoading, loading }) {
-  const [data, setData] = useState([]);
-  const [done, setDone] = useState(undefined);
+function Splash({ setLoading }) {
+  const [done] = useState(undefined);
 
   setTimeout(() => {
     setLoading(false);

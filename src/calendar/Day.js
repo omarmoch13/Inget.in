@@ -1,9 +1,27 @@
+import { message } from "antd";
+import axios from "axios";
 import dayjs from "dayjs";
 import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
 
 export default function Day({ day, rowIdx }) {
   const [dayEvents, setDayEvents] = useState([]);
+  const [data, setData] = useState({ judul: "", kegiatan: "" });
+  const [error, setError] = useState("");
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.judul]: input.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:4000/api/kalender";
+      const { data: res } = await axios.post(url, data);
+      console.log(res.data);
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
   const {
     setDaySelected,
     setShowEventModal,
@@ -26,7 +44,7 @@ export default function Day({ day, rowIdx }) {
   }
   return (
     <div className="border border-gray-200 flex flex-col">
-      <header className="flex flex-col items-center">
+      <header className="flex flex-col items-center ">
         {rowIdx === 0 && (
           <p className="text-sm mt-1">
             {day.format("ddd").toUpperCase()}
@@ -39,17 +57,21 @@ export default function Day({ day, rowIdx }) {
         </p>
       </header>
       <div
-        className="flex-1 cursor-pointer"
+        className="flex-1 cursor-pointer bg-blue-100"
         onClick={() => {
           setDaySelected(day);
           setShowEventModal(true);
         }}
+        onChange={handleSubmit}
+        value={data.judul}
       >
         {dayEvents.map((evt, idx) => (
           <div
             key={idx}
             onClick={() => setSelectedEvent(evt)}
             className={`bg-${evt.label}-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
+            onChange={handleSubmit}
+            value={data.judul}
           >
             {evt.title}
           </div>

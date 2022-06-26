@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsCalendarDate } from "react-icons/bs";
 import { BsCheckLg } from "react-icons/bs";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -6,19 +6,19 @@ import { CgProfile } from "react-icons/cg";
 import { ImBook } from "react-icons/im";
 import "./Sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({ userId }) {
   return (
     <>
       <aside
-        className="bg-blue-500 w-[35vw] h-vscreen p-2"
+        className="bg-blue-500 w-[35vw] h-auto p-2"
         style={{
-          minHeight: "100%",
+          minheight: "100%",
           display: "block",
           zIndex: "1",
         }}
       >
         <div className="profil-logo">
-          <a href="/Profil">
+          <a href={`/Profil/${userId}`}>
             <CgProfile color="white" size="2.1em" />
           </a>
         </div>

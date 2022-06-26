@@ -38,9 +38,11 @@ export default function DiaryForm({ addItem }) {
         <textarea
           value={text}
           onChange={(event) => setText(event.target.value)}
-          rows="2"
+          rows="12"
           placeholder="Ceritakan Tentang Hari Ini"
           className="diary-textarea"
+          maxLength={1000}
+          style={{ resize: "none" }}
         ></textarea>
         <button type="submit" className="diary-button">
           Tambahkan

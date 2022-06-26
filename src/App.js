@@ -6,11 +6,9 @@ import Sidebar from "./calendar/Sidebar";
 import Month from "./calendar/Month";
 import GlobalContext from "./context/GlobalContext";
 import EventModal from "./calendar/EventModal";
-import Catatan from "./catatan/Catatan";
 import Jadwal from "./Jadwal/Jadwal";
 import Todo from "./todo/Todo";
 import Splash from "./splash/Splash";
-import Headbar from "./todo/Headbar";
 import { store, persistor } from "./catatan/Store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -23,43 +21,61 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 
 function App() {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
+  const [userId, setUserId] = useState("");
   const { monthIndex, showEventModal } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
+  const user = localStorage.getItem("token");
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
+    setUserId(localStorage.getItem("id"));
   }, [monthIndex]);
 
   return (
     <React.Fragment>
       {showEventModal && <EventModal />}
+
       {loading === true ? (
         <div className="HeaderSplash">
           <Splash setLoading={setLoading} loading={loading} />
         </div>
       ) : (
         <div style={{ display: "flex", height: "100%" }}>
-          <Sidebar />
+          <Sidebar userId={userId} />
           <Router>
             <Routes>
-              <Route exact path="/" element={<Login />} />
+              {user && (
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <>
+                      {" "}
+                      <div className=" h-screen flex flex-col flex-1">
+                        <CalendarHeader />
+                        <Month month={currenMonth} />
+                      </div>
+                    </>
+                  }
+                />
+              )}
+
+              <Route
+                exact
+                path="/Login"
+                element={<Login setUserId={setUserId} />}
+              />
+
               <Route exact path="/Register" element={<Register />} />
               <Route
                 exact
-                path="/Kalender"
-                element={
-                  <>
-                    {" "}
-                    <div className=" h-screen flex flex-col flex-1">
-                      <CalendarHeader />
-                      <Month month={currenMonth} />
-                    </div>
-                  </>
-                }
+                path="/"
+                element={<Navigate replace to="/Login" />}
               />
               <Route
                 exact
@@ -91,7 +107,7 @@ function App() {
                 }
               />
               <Route exact path="/Jadwal" element={<Jadwal />} />
-              <Route exact path="/Profil" element={<Profil />} />
+              <Route exact path="/Profil/:id" element={<Profil />} />
             </Routes>
           </Router>
         </div>
