@@ -18,7 +18,7 @@ function Todo() {
     todo: {
       items: [],
     },
-    "in-progress": {
+    inProgress: {
       items: [],
     },
     done: {
@@ -28,27 +28,25 @@ function Todo() {
   const [data, setData] = useState({ deskripsi: "" });
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `http://localhost:4000/api/todo/${localStorage.getItem("id")}`
+      );
+      if (
+        response.data.list != undefined ||
+        response.data.list != null
+      ) {
+        const responded = response.data.list;
+        delete responded["_id"];
+        setState(responded);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.deskripsi]: input.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const url = "http://localhost:4000/api/todo";
-      const { data: res } = await axios.post(url, data);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("id", res.data.id);
-      window.location = "/";
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
   };
 
   const handleDragEnd = ({ destination, source }) => {
@@ -84,8 +82,8 @@ function Todo() {
     });
   };
 
-  const addItem = () => {
-    setState((prev) => {
+  const addItem = async () => {
+    await setState((prev) => {
       return {
         ...prev,
         todo: {
@@ -93,15 +91,30 @@ function Todo() {
             {
               id: v4(),
               name: text,
-              onchange: handleChange,
             },
             ...prev.todo.items,
           ],
         },
       };
     });
-
     setText("");
+
+    console.log(state);
+
+    try {
+      const url = `http://localhost:4000/api/todo/${localStorage.getItem(
+        "id"
+      )}`;
+      await axios.post(url, { list: state });
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
   };
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -117,20 +130,20 @@ function Todo() {
             </button>
           </a0>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <form onSubmit={handleSubmit}>
-              <div className="add-text">
-                <input
-                  type="text"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                />
-                <div className="button">
-                  <button onClick={addItem}>
-                    <aBUTTON>Tambahkan</aBUTTON>
-                  </button>
-                </div>
+            <div className="add-text">
+              <input
+                type="text"
+                value={text}
+                onChange={(e) => {
+                  setText(e.target.value);
+                }}
+              />
+              <div className="button">
+                <button type="submit" onClick={addItem}>
+                  <aBUTTON>Tambahkan</aBUTTON>
+                </button>
               </div>
-            </form>
+            </div>
           </Modal>
 
           <a1>Aktifitas</a1>
@@ -154,7 +167,6 @@ function Todo() {
           {_.map(state, (data, key) => {
             return (
               <div key={key} className={"column"}>
-                <h3>{data.title}</h3>
                 <Droppable droppableId={key}>
                   {(provided, snapshot) => {
                     return (
