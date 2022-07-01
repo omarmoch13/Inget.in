@@ -9,3 +9,7 @@
   flex-direction: column;
   row-gap: 20px;
 }
+
+.con {
+  height: 100vh;
+}

@@ -40,6 +40,7 @@ function Todo() {
         const responded = response.data.list;
         delete responded["_id"];
         setState(responded);
+        console.log(responded);
       }
     };
     fetchData();
@@ -49,7 +50,7 @@ function Todo() {
     setData({ ...data, [input.deskripsi]: input.value });
   };
 
-  const handleDragEnd = ({ destination, source }) => {
+  const handleDragEnd = async ({ destination, source }) => {
     if (!destination) {
       return;
     }
@@ -77,11 +78,40 @@ function Todo() {
         0,
         itemCopy
       );
-
       return prev;
     });
+    try {
+      const url = `http://localhost:4000/api/todo/${localStorage.getItem(
+        "id"
+      )}`;
+      await axios.post(url, { list: state });
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
   };
-
+  const deleteItem = async () => {
+    await setState((prev) => {
+      return {
+        prev,
+        done: {
+          items: [
+            {
+              id: v4(),
+              name: text,
+            },
+            ...prev.done.items,
+          ],
+        },
+      };
+    });
+    console.log(state);
+  };
   const addItem = async () => {
     await setState((prev) => {
       return {
@@ -119,6 +149,7 @@ function Todo() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="Container">
+      {deleteItem}
       <div className="headbar">
         <div className="Text-headbar">
           <a0>
@@ -152,17 +183,6 @@ function Todo() {
         </div>
       </div>
       <div className="App">
-        {/* <div className="add-text">
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <div className="button">
-            <button onClick={addItem}>Tambahkan</button>
-          </div>
-        </div> */}
-
         <DragDropContext onDragEnd={handleDragEnd}>
           {_.map(state, (data, key) => {
             return (
@@ -183,7 +203,6 @@ function Todo() {
                               draggableId={el.id}
                             >
                               {(provided, snapshot) => {
-                                console.log(snapshot);
                                 return (
                                   <div
                                     className={`item ${

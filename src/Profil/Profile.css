@@ -73,12 +73,15 @@ a4 {
   margin-left: 24%;
 }
 .margin {
-  margin-left: 100px;
   border-radius: 5px;
   width: 20%;
+  background-color: #5463ff;
+  font-weight: bold;
+  margin-left: 1%;
 }
 .textfield {
   margin-top: 4%;
+
   margin-left: 10%;
 }
 .field {

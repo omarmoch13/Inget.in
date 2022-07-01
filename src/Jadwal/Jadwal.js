@@ -1,146 +1,54 @@
 import "./Jadwal.css";
-import React from "react";
-import { TextField } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-// // import React from "react";
-
-// import React, { useState, useEffect } from "react";
-// import { View } from "./View";
-
-// // getting the values of local storage
-
-// // getting the values of local storage
-// const getDatafromLS = () => {
-//   const data = localStorage.getItem("books");
-//   if (data) {
-//     return JSON.parse(data);
-//   } else {
-//     return [];
-//   }
-// };
-
-// export const Jadwal = () => {
-//   // main array of objects state || books state || books array of objects
-//   const [books, setbooks] = useState(getDatafromLS());
-
-//   // input field states
-//   const [waktu, setWaktu] = useState("");
-//   const [senin, setSenin] = useState("");
-//   const [selasa, setSelasa] = useState("");
-
-//   // form submit event
-//   const handleAddBookSubmit = (e) => {
-//     e.preventDefault();
-//     // creating an object
-//     let book = {
-//       waktu,
-//       senin,
-//       selasa,
-//     };
-//     setbooks([...books, book]);
-//     setWaktu("");
-//     setSenin("");
-//     setSelasa("");
-//   };
-
-//   // delete book from LS
-//   const deleteBook = (waktu) => {
-//     const filteredBooks = books.filter((element, index) => {
-//       return element.waktu !== waktu;
-//     });
-//     setbooks(filteredBooks);
-//   };
-
-//   // saving data to local storage
-//   useEffect(() => {
-//     localStorage.setItem("books", JSON.stringify(books));
-//   }, [books]);
-
-//   return (
-//     <div className="container-jadwal">
-//       <div className="wrapper">
-//         <div className="wrapper-judul">
-//           <ajudul>Jadwal Sekolah</ajudul>
-//         </div>
-//         <div className="main">
-//           <div className="form-container">
-//             <form
-//               autoComplete="off"
-//               className="form-group"
-//               onSubmit={handleAddBookSubmit}
-//             >
-//               <label>Waktu</label>
-//               <input
-//                 type="text"
-//                 className="form-control"
-//                 required
-//                 onChange={(e) => setWaktu(e.target.value)}
-//                 value={waktu}
-//               ></input>
-//               <br></br>
-//               <label>Senin</label>
-//               <input
-//                 type="text"
-//                 className="form-control"
-//                 required
-//                 onChange={(e) => setSenin(e.target.value)}
-//                 value={senin}
-//               ></input>
-//               <br></br>
-//               <label>Selasa</label>
-//               <input
-//                 type="text"
-//                 className="form-control"
-//                 required
-//                 onChange={(e) => setSelasa(e.target.value)}
-//                 value={selasa}
-//               ></input>
-//               <br></br>
-//               <button
-//                 type="submit"
-//                 className="btn btn-success btn-md"
-//               >
-//                 ADD
-//               </button>
-//             </form>
-//           </div>
-
-//           <div className="view-container">
-//             {books.length > 0 && (
-//               <>
-//                 <div className="table-responsive">
-//                   <table className="table">
-//                     <thead>
-//                       <tr>
-//                         <th> Waktu </th>
-//                         <th> Senin </th>
-//                         <th> Selasa </th>
-//                         <th> Delete </th>
-//                       </tr>
-//                     </thead>
-//                     <tbody>
-//                       <View books={books} deleteBook={deleteBook} />
-//                     </tbody>
-//                   </table>
-//                 </div>
-//                 <button
-//                   className="btn btn-danger btn-md"
-//                   onClick={() => setbooks([])}
-//                 >
-//                   Remove All
-//                 </button>
-//               </>
-//             )}
-//             {books.length < 1 && <div>No books are added yet</div>}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Jadwal;
 const Jadwal = () => {
+  const [text, setText] = useState("");
+  const [matpel, setMatpel] = useState([]);
+  const [data, setData] = useState({
+    nama: " ",
+    kelas: " ",
+    matpel: [],
+  });
+  const params = useParams();
+
+  const saveData = async () => {
+    let body = {
+      nama: data.nama,
+      kelas: data.kelas,
+      matpel: data.matpel,
+    };
+    console.log(body);
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/api/jadwal/${localStorage.getItem(
+          "id"
+        )}`,
+        body
+      );
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/jadwal/${localStorage.getItem(
+            "id"
+          )}`
+        );
+        setData(response.data);
+        setMatpel(response.data.matpel);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="container-Jadwal">
       <div className="container-wrapper">
@@ -149,116 +57,182 @@ const Jadwal = () => {
         </div>
         <div className="container-nama">
           <anama>
-            Nama :<TextField className="fieldarea" />
+            Nama :
+            <input
+              className="fieldarea"
+              value={data.nama}
+              onChange={(e) =>
+                setData({ ...data, nama: e.target.value })
+              }
+            />
           </anama>
           <akelas>
-            Kelas :<TextField className="fieldarea" />
+            Kelas :
+            <input
+              className="fieldarea"
+              value={data.kelas}
+              onChange={(e) =>
+                setData({ ...data, kelas: e.target.value })
+              }
+            />
           </akelas>
         </div>
-        <div className="table-jadwal">
-          <table id="Sekolah">
-            <tr>
-              <th>Waktu</th>
-              <th>Senin</th>
-              <th>Selasa</th>
-              <th>Rabu</th>
-              <th>Kamis</th>
-              <th>Jumat</th>
-              <th>Sabtu</th>
-            </tr>
-            <tr>
-              <td contentEditable={true}>8.30 - 10.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>10.00 - 12.00</td>
 
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
+        <tr>
+          <th>Waktu</th>
+          <th>Senin</th>
+          <th>Selasa</th>
+          <th>Rabu</th>
+          <th>Kamis</th>
+          <th>Jumat</th>
+          <th>Sabtu</th>
+        </tr>
+        {matpel.map((datas, idx) => {
+          return (
+            <tr key={idx}>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="waktu"
+              >
+                {datas.waktu}
+              </td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="senin"
+              >
+                {datas.senin}
+              </td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="selasa"
+              >
+                {datas.selasa}
+              </td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="rabu"
+              >
+                {datas.rabu}
+              </td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="kamis"
+              >
+                {datas.kamis}
+              </td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="jumat"
+              >
+                {datas.jumat}
+              </td>
+              <td
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onInput={(e) => {
+                  let obj = data.matpel;
+                  obj[idx] = {
+                    ...obj[idx],
+                    [e.currentTarget.className]:
+                      e.currentTarget.textContent,
+                  };
+                  setData({ ...data, matpel: obj });
+                }}
+                className="sabtu"
+              >
+                {datas.sabtu}
+              </td>
             </tr>
-            <tr>
-              <td contentEditable={true}>13.00 - 14.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-            <tr>
-              <td contentEditable={true}>14.00 - 15.00</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Matematika</td>
-              <td contentEditable={true}>Biologi</td>
-              <td contentEditable={true}>Sejarah</td>
-              <td contentEditable={true}>Sejarah</td>
-            </tr>
-          </table>
-        </div>
+          );
+        })}
+        <button
+          onClick={() => {
+            setMatpel([
+              ...matpel,
+              {
+                waktu: "",
+                senin: "",
+                selasa: "",
+                rabu: "",
+                kamis: "",
+                jumat: "",
+                sabtu: "",
+              },
+            ]);
+            setData({ ...data, matpel: matpel });
+          }}
+          className="buttonjad"
+          type="submit"
+        >
+          Tambahkan
+        </button>
+        <button
+          onClick={saveData}
+          className="buttonjad"
+          type="submit"
+        >
+          Simpan
+        </button>
       </div>
     </div>
   );

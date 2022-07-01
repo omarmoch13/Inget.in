@@ -89,7 +89,7 @@ export default function Register() {
                 value={data.password}
                 required
                 placeholder="Password"
-                type="text"
+                type="password"
                 name="password"
                 className="input-password"
               />

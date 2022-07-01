@@ -66,7 +66,7 @@ const Profil = () => {
             <div className="column1">
               <a1>
                 Nama :
-                <TextField
+                <input
                   className="margin"
                   value={data.name}
                   onChange={(e) =>
@@ -76,7 +76,7 @@ const Profil = () => {
               </a1>
               <a2>
                 Umur :
-                <TextField
+                <input
                   className="margin"
                   value={data.umur}
                   onChange={(e) =>
@@ -88,7 +88,7 @@ const Profil = () => {
             <div className="column2">
               <a3>
                 Email :
-                <TextField
+                <input
                   className="margin"
                   color="white"
                   value={data.email}
@@ -100,7 +100,7 @@ const Profil = () => {
               </a3>
               <a4>
                 Nomor Telfon :
-                <TextField
+                <input
                   className="margin"
                   value={data.nomor}
                   onChange={(e) =>
@@ -116,7 +116,7 @@ const Profil = () => {
               multiline
               className="field"
               value={data.cerita}
-              label={`ceritakan tentang diri kamu ${text.length}/256`}
+              placeholder={`ceritakan tentang diri kamu ${text.length}/256`}
               onChange={(e) => {
                 setData({ ...data, cerita: e.target.value });
                 setText(e.target.value);
@@ -124,7 +124,6 @@ const Profil = () => {
               inputProps={{ maxLength: 256 }}
             />
           </div>
-          <div className="save-button"></div>
         </div>
       </div>
     </div>

@@ -43,13 +43,13 @@ export default function Login({ setUserId }) {
             <form onSubmit={handleSubmit}>
               <br></br>
               <input
-                placeholder="Username"
-                type="username"
                 onChange={handleChange}
                 value={data.username}
-                name="username"
                 required
-                className="input-login"
+                placeholder="username"
+                type="text"
+                name="username"
+                className="input-Email"
               />
 
               <br></br>
@@ -60,15 +60,18 @@ export default function Login({ setUserId }) {
                 onChange={handleChange}
                 value={data.password}
                 name="password"
-                className="input-password"
+                className="input-password
+              "
               />
               {error && <div className="error_msg">{error}</div>}
               <button className="button-masuk" type="submit">
                 Masuk
               </button>
+              <a href="/Register" className="button-buat">
+                Buat Akun
+              </a>
             </form>
           </div>
-          <a href="/Register">Buat Akun</a>
         </div>
       </div>
     </div>

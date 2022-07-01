@@ -45,7 +45,7 @@ function App() {
           <Splash setLoading={setLoading} loading={loading} />
         </div>
       ) : (
-        <div style={{ display: "flex", height: "100%" }}>
+        <div style={{ display: "flex" }}>
           <Sidebar userId={userId} />
           <Router>
             <Routes>
@@ -83,7 +83,7 @@ function App() {
                 element={
                   <>
                     {" "}
-                    <div className=" h-screen flex flex-col flex-1 bg-yellow-300 ">
+                    <div className=" min-h-max flex flex-col flex-1 ">
                       <Todo />
                     </div>
                   </>

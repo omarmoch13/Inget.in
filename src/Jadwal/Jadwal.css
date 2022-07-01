@@ -7,7 +7,16 @@
   align-items: center;
   align-content: center;
 }
-
+.buttonjad {
+  margin-left: 45%;
+  background-color: rgba(255, 24, 24, 90%);
+  margin-top: 2%;
+  color: #ffcf33;
+  font-weight: bold;
+  width: 10%;
+  height: 30px;
+  border-radius: 10px;
+}
 .container-judul {
   width: 20%;
   margin-left: 40%;
@@ -45,7 +54,8 @@
   font-weight: bold;
 }
 .fieldarea {
-  margin-left: 10%;
+  margin-left: 1%;
+  background-color: #5463ff;
 }
 
 td {
@@ -61,8 +71,10 @@ td {
   max-width: 100px;
   white-space: pre-wrap;
   word-wrap: break-word !important;
+  background-color: white;
+  font-weight: bold;
 }
-table {
+/* table {
   width: 95%;
   background-color: white;
   border-spacing: 2%;
@@ -72,7 +84,7 @@ table {
   border-radius: 20px;
   margin-left: 2.5%;
   max-width: 100%;
-}
+} */
 
 th {
   background-color: #5463ff;

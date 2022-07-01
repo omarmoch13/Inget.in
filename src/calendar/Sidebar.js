@@ -10,9 +10,9 @@ export default function Sidebar({ userId }) {
   return (
     <>
       <aside
-        className="bg-blue-500 w-[35vw] h-auto p-2"
+        className="bg-blue-500 w-[35vw] min-h-max p-2"
         style={{
-          minheight: "100%",
+          minheight: "maxcontent",
           display: "block",
           zIndex: "1",
         }}

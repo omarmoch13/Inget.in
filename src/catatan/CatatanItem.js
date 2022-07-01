@@ -8,7 +8,6 @@ export default function DiaryItem({ item, showModal, deleteItem }) {
       <span
         onClick={() => showModal(item)}
         style={{ wordBreak: "break-word" }}
-        
       >
         {item.title}
       </span>
