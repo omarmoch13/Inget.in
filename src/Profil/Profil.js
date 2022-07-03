@@ -13,6 +13,7 @@ const Profil = () => {
   const [data, setData] = useState({});
   const [imgPreview, setImgPreview] = useState(null);
   const [error, setError] = useState(false);
+  const [types, setTypes] = useState("");
   const params = useParams();
 
   const saveData = async () => {
@@ -21,7 +22,8 @@ const Profil = () => {
       umur: data.umur,
       nomor: data.nomor,
       cerita: data.cerita,
-      foto: data.foto,
+      foto: imgPreview,
+      type: types,
     };
     const response = await axios.patch(
       `http://localhost:4000/api/profil/${params.id}`,
@@ -42,10 +44,9 @@ const Profil = () => {
           `http://localhost:4000/api/profil/${params.id}`
         );
         await setData(response.data.data);
+        setImgPreview(response.data.data.foto);
         if (response.data.data.cerita !== undefined)
           setText(response.data.data.cerita);
-        if (response.data.data.foto !== undefined)
-          setData(response.data.data.foto);
       } catch (e) {
         console.log(e);
       }
@@ -58,6 +59,7 @@ const Profil = () => {
     const selected = e.target.files[0];
     const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg"];
     if (selected && ALLOWED_TYPES.includes(selected.type)) {
+      setTypes(selected.type);
       let reader = new FileReader();
       reader.onloadend = () => {
         setImgPreview(reader.result);
@@ -140,7 +142,6 @@ const Profil = () => {
                   type="file"
                   id="fileUpload"
                   onChange={handleImageChange}
-                  value={data.foto}
                 />
                 {/* <span>(jpg, jpeg, png)</span> */}
               </>

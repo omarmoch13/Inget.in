@@ -87,124 +87,128 @@ const Jadwal = () => {
           <th>Jumat</th>
           <th>Sabtu</th>
         </tr>
-        {matpel.map((datas, idx) => {
-          return (
-            <tr key={idx}>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="waktu"
-              >
-                {datas.waktu}
-              </td>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="senin"
-              >
-                {datas.senin}
-              </td>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="selasa"
-              >
-                {datas.selasa}
-              </td>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="rabu"
-              >
-                {datas.rabu}
-              </td>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="kamis"
-              >
-                {datas.kamis}
-              </td>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="jumat"
-              >
-                {datas.jumat}
-              </td>
-              <td
-                contentEditable={true}
-                suppressContentEditableWarning={true}
-                onInput={(e) => {
-                  let obj = data.matpel;
-                  obj[idx] = {
-                    ...obj[idx],
-                    [e.currentTarget.className]:
-                      e.currentTarget.textContent,
-                  };
-                  setData({ ...data, matpel: obj });
-                }}
-                className="sabtu"
-              >
-                {datas.sabtu}
-              </td>
-            </tr>
-          );
-        })}
+        {matpel == undefined ? null : (
+          <>
+            {matpel.map((datas, idx) => {
+              return (
+                <tr key={idx}>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="waktu"
+                  >
+                    {datas.waktu}
+                  </td>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="senin"
+                  >
+                    {datas.senin}
+                  </td>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="selasa"
+                  >
+                    {datas.selasa}
+                  </td>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="rabu"
+                  >
+                    {datas.rabu}
+                  </td>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="kamis"
+                  >
+                    {datas.kamis}
+                  </td>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="jumat"
+                  >
+                    {datas.jumat}
+                  </td>
+                  <td
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      let obj = data.matpel;
+                      obj[idx] = {
+                        ...obj[idx],
+                        [e.currentTarget.className]:
+                          e.currentTarget.textContent,
+                      };
+                      setData({ ...data, matpel: obj });
+                    }}
+                    className="sabtu"
+                  >
+                    {datas.sabtu}
+                  </td>
+                </tr>
+              );
+            })}
+          </>
+        )}
         <button
           onClick={() => {
             setMatpel([
