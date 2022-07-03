@@ -6,10 +6,13 @@ import { TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import user from "../assets/user.png";
 
 const Profil = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState({});
+  const [imgPreview, setImgPreview] = useState(null);
+  const [error, setError] = useState(false);
   const params = useParams();
 
   const saveData = async () => {
@@ -18,6 +21,7 @@ const Profil = () => {
       umur: data.umur,
       nomor: data.nomor,
       cerita: data.cerita,
+      foto: data.foto,
     };
     const response = await axios.patch(
       `http://localhost:4000/api/profil/${params.id}`,
@@ -40,12 +44,49 @@ const Profil = () => {
         await setData(response.data.data);
         if (response.data.data.cerita !== undefined)
           setText(response.data.data.cerita);
+        if (response.data.data.foto !== undefined)
+          setData(response.data.data.foto);
       } catch (e) {
         console.log(e);
       }
     };
     fetchData();
   }, []);
+
+  const handleImageChange = (e) => {
+    setError(false);
+    const selected = e.target.files[0];
+    const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg"];
+    if (selected && ALLOWED_TYPES.includes(selected.type)) {
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        setImgPreview(reader.result);
+      };
+      reader.readAsDataURL(selected);
+    } else {
+      setError(true);
+    }
+  };
+  // const [src, setSrc] = useState(null);
+  // const [preview, setPreview] = useState(null);
+
+  // const onClose = () => {
+  //   setPreview(null);
+  // };
+  // const onCrop = (view) => {
+  //   setPreview(view);
+  // };
+
+  // const onBeforeFileLoad = (elem) => {
+  //   if (elem.target.files[0].size > 71680) {
+  //     alert("File is too big!");
+  //     elem.target.value = "";
+  //   }
+  // };
+
+  // const onFileLoad = (view) => {
+
+  // };
 
   return (
     <div className="wrapper-profil">
@@ -55,13 +96,67 @@ const Profil = () => {
             <ajudul>PROFILE</ajudul>
           </div>
           <div className="button-logout">
-            <Link to={"/Login"}>Keluar</Link>
+            <Link to={"/Login"}>
+              <akeluar>Keluar</akeluar>
+            </Link>
           </div>
 
-          <div className="profile-logo">
-            <Avatar size={150} icon="user" />
-            <button onClick={saveData}>Save</button>
+          {error && <p className="errorMsg">file tidak disuport</p>}
+          <div
+            className="imgPreview"
+            style={{
+              background: imgPreview
+                ? `url("${imgPreview}") no-repeat center/cover`
+                : "#5463ff",
+            }}
+          >
+            {!imgPreview && (
+              <>
+                {/* <p>masukan gambar</p> */}
+                <label
+                  htmlFor="fileUpload"
+                  className="customFileUpload"
+                >
+                  <img
+                    src={user}
+                    className="imageuser"
+                    onChange={(e) =>
+                      setData({ ...data, foto: e.target.value })
+                    }
+                  />
+                </label>
+                {/* <Avatar
+                  width={200}
+                  height={150}
+                  src={src}
+                  onCrop={onCrop}
+                  onClose={onClose}
+                  onBeforeFileLoad={onBeforeFileLoad}
+                  label="Masukan Foto"
+                  onFileLoad={onFileLoad}
+                  onChange={handleImageChange}
+                /> */}
+                <input
+                  type="file"
+                  id="fileUpload"
+                  onChange={handleImageChange}
+                  value={data.foto}
+                />
+                {/* <span>(jpg, jpeg, png)</span> */}
+              </>
+            )}
           </div>
+          <button className="profile-logo-button" onClick={saveData}>
+            Save
+          </button>
+          {imgPreview && (
+            <button
+              className="buttonhapus"
+              onClick={() => setImgPreview(null)}
+            >
+              remove image
+            </button>
+          )}
           <div className="column-judul">
             <div className="column1">
               <a1>
