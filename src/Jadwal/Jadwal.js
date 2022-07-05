@@ -41,14 +41,15 @@ const Jadwal = () => {
           )}`
         );
         setData(response.data);
-        setMatpel(response.data.matpel);
+        if (response.data.matpel !== undefined)
+          setMatpel(response.data.matpel);
       } catch (e) {
         console.log(e);
       }
     };
     fetchData();
   }, []);
-
+  console.log(matpel);
   return (
     <div className="container-Jadwal">
       <div className="container-wrapper">
