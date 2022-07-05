@@ -113,6 +113,7 @@ function Todo() {
     console.log(state);
   };
   const addItem = async () => {
+    console.log(text);
     await setState((prev) => {
       return {
         ...prev,
@@ -127,7 +128,6 @@ function Todo() {
         },
       };
     });
-    setText("");
 
     console.log(state);
 
@@ -136,6 +136,7 @@ function Todo() {
         "id"
       )}`;
       await axios.post(url, { list: state });
+      setText("");
     } catch (error) {
       if (
         error.response &&

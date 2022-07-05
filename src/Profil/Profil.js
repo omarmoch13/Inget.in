@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
-import "antd/dist/antd.css";
-import { Avatar } from "antd";
+
 import "./Profile.css";
 import { TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import user from "../assets/user.png";
+import Avatar from "react-avatar-edit";
+import ViewTypes from "scheduler-react/lib/ViewTypes";
 
-const Profil = () => {
+const Profil = ({ setLoading }) => {
   const [text, setText] = useState("");
   const [data, setData] = useState({});
   const [imgPreview, setImgPreview] = useState(null);
   const [error, setError] = useState(false);
   const [types, setTypes] = useState("");
+  const [preview, setPreview] = useState(null);
   const params = useParams();
 
   const saveData = async () => {
@@ -22,7 +24,7 @@ const Profil = () => {
       umur: data.umur,
       nomor: data.nomor,
       cerita: data.cerita,
-      foto: imgPreview,
+      foto: preview == null ? imgPreview : preview,
       type: types,
     };
     const response = await axios.patch(
@@ -63,32 +65,32 @@ const Profil = () => {
       let reader = new FileReader();
       reader.onloadend = () => {
         setImgPreview(reader.result);
+        console.log(reader.result);
       };
       reader.readAsDataURL(selected);
     } else {
       setError(true);
     }
   };
-  // const [src, setSrc] = useState(null);
-  // const [preview, setPreview] = useState(null);
+  const [src, setSrc] = useState(null);
 
-  // const onClose = () => {
-  //   setPreview(null);
-  // };
-  // const onCrop = (view) => {
-  //   setPreview(view);
-  // };
+  const onClose = () => {
+    setPreview(null);
+  };
+  const onCrop = (view) => {
+    setPreview(view);
+  };
 
-  // const onBeforeFileLoad = (elem) => {
-  //   if (elem.target.files[0].size > 71680) {
-  //     alert("File is too big!");
-  //     elem.target.value = "";
-  //   }
-  // };
+  const onBeforeFileLoad = (elem) => {
+    if (elem.target.files[0].size > 716800) {
+      alert("File is too big!");
+      elem.target.value = "";
+    }
+  };
 
-  // const onFileLoad = (view) => {
-
-  // };
+  const onFileLoad = (view) => {
+    console.log(view);
+  };
 
   return (
     <div className="wrapper-profil">
@@ -115,7 +117,7 @@ const Profil = () => {
             {!imgPreview && (
               <>
                 {/* <p>masukan gambar</p> */}
-                <label
+                {/* <label
                   htmlFor="fileUpload"
                   className="customFileUpload"
                 >
@@ -126,18 +128,22 @@ const Profil = () => {
                       setData({ ...data, foto: e.target.value })
                     }
                   />
-                </label>
-                {/* <Avatar
+                </label> */}
+                <Avatar
                   width={200}
                   height={150}
                   src={src}
                   onCrop={onCrop}
                   onClose={onClose}
                   onBeforeFileLoad={onBeforeFileLoad}
-                  label="Masukan Foto"
+                  label="Masukan Gambar"
                   onFileLoad={onFileLoad}
-                  onChange={handleImageChange}
-                /> */}
+                  className="imageuser"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setData({ ...data, foto: e.target.value });
+                  }}
+                />
                 <input
                   type="file"
                   id="fileUpload"
