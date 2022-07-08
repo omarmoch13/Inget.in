@@ -19,7 +19,6 @@ const Jadwal = () => {
       kelas: data.kelas,
       matpel: data.matpel,
     };
-    console.log(body);
     try {
       const response = await axios.post(
         `http://localhost:4000/api/jadwal/${localStorage.getItem(
@@ -32,6 +31,31 @@ const Jadwal = () => {
       console.log(e);
     }
   };
+
+  const deleteItem = async () => {
+    let matapel = [...matpel];
+    matapel.pop();
+    setMatpel(matapel);
+    setData({ ...data, matpel: matpel });
+    let body = {
+      nama: data.nama,
+      kelas: data.kelas,
+      matpel: matapel,
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/api/jadwal/${localStorage.getItem(
+          "id"
+        )}`,
+        body
+      );
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,7 +73,7 @@ const Jadwal = () => {
     };
     fetchData();
   }, []);
-  console.log(matpel);
+
   return (
     <div className="container-Jadwal">
       <div className="container-wrapper">
@@ -210,34 +234,48 @@ const Jadwal = () => {
             })}
           </>
         )}
-        <button
-          onClick={() => {
-            setMatpel([
-              ...matpel,
-              {
-                waktu: "",
-                senin: "",
-                selasa: "",
-                rabu: "",
-                kamis: "",
-                jumat: "",
-                sabtu: "",
-              },
-            ]);
-            setData({ ...data, matpel: matpel });
-          }}
-          className="buttonjad"
-          type="submit"
-        >
-          Tambahkan
-        </button>
-        <button
-          onClick={saveData}
-          className="buttonjad"
-          type="submit"
-        >
-          Simpan
-        </button>
+        <div className="button-flex">
+          <button
+            onClick={() => {
+              if (matpel.length <= 10) {
+                setMatpel([
+                  ...matpel,
+                  {
+                    waktu: "",
+                    senin: "",
+                    selasa: "",
+                    rabu: "",
+                    kamis: "",
+                    jumat: "",
+                    sabtu: "",
+                  },
+                ]);
+                setData({ ...data, matpel: matpel });
+              }
+            }}
+            className="buttonjad"
+            type="submit"
+          >
+            Tambahkan
+          </button>
+          <button
+            onClick={saveData}
+            className="buttonjad"
+            type="submit"
+          >
+            Simpan
+          </button>
+          <button
+            onClick={() => {
+              deleteItem();
+            }}
+            className="buttonjad"
+            type="submit"
+          >
+            {" "}
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

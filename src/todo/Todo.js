@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BsPlusSquare } from "react-icons/bs";
+import { TiDeleteOutline } from "react-icons/ti";
 import Modal from "./Modal";
 import axios from "axios";
 import "./Todo.css";
@@ -40,7 +41,6 @@ function Todo() {
         const responded = response.data.list;
         delete responded["_id"];
         setState(responded);
-        console.log(responded);
       }
     };
     fetchData();
@@ -95,23 +95,28 @@ function Todo() {
       }
     }
   };
-  const deleteItem = async () => {
-    await setState((prev) => {
-      return {
-        prev,
-        done: {
-          items: [
-            {
-              id: v4(),
-              name: text,
-            },
-            ...prev.done.items,
-          ],
-        },
-      };
-    });
-    console.log(state);
+  const deleteItem = async (el, key) => {
+    let removedData = state[key].items;
+    removedData = removedData.filter((e) => e.id != el.id);
+    state[key].items = removedData;
+    setState(state);
+    try {
+      const url = `http://localhost:4000/api/todo/${localStorage.getItem(
+        "id"
+      )}`;
+      await axios.post(url, { list: state });
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
   };
+  console.log(state);
+
   const addItem = async () => {
     console.log(text);
     await setState((prev) => {
@@ -150,7 +155,6 @@ function Todo() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="Container">
-      {deleteItem}
       <div className="headbar">
         <div className="Text-headbar">
           <a0>
@@ -214,7 +218,21 @@ function Todo() {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                   >
-                                    {el.name}
+                                    <div
+                                      className="inside"
+                                      key={el.id}
+                                    >
+                                      <TiDeleteOutline
+                                        onClick={() =>
+                                          deleteItem(el, key)
+                                        }
+                                        style={{
+                                          fontSize: "25px",
+                                          cursor: "pointer",
+                                        }}
+                                      />
+                                      {el.name}
+                                    </div>
                                   </div>
                                 );
                               }}

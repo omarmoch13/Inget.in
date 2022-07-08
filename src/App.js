@@ -46,23 +46,25 @@ function App() {
         </div>
       ) : (
         <div style={{ display: "flex" }}>
-          <Sidebar userId={userId} />
           <Router>
             <Routes>
-              {user && (
-                <Route
-                  exact
-                  path="/"
-                  element={
-                    <>
-                      {" "}
-                      <div className=" h-screen flex flex-col flex-1">
-                        <CalendarHeader />
-                        <Month month={currenMonth} />
-                      </div>
-                    </>
-                  }
-                />
+              {user == null ? null : (
+                <>
+                  <Route
+                    exact
+                    path="/"
+                    element={
+                      <>
+                        {" "}
+                        <Sidebar userId={userId} />
+                        <div className=" h-screen flex flex-col flex-1">
+                          <CalendarHeader />
+                          <Month month={currenMonth} />
+                        </div>
+                      </>
+                    }
+                  />
+                </>
               )}
 
               <Route
@@ -83,6 +85,7 @@ function App() {
                 element={
                   <>
                     {" "}
+                    <Sidebar userId={userId} />
                     <div className=" min-h-max flex flex-col flex-1 ">
                       <Todo />
                     </div>
@@ -95,6 +98,7 @@ function App() {
                 element={
                   <>
                     {" "}
+                    <Sidebar userId={userId} />
                     <Provider store={store}>
                       <PersistGate
                         loading={null}
@@ -106,8 +110,26 @@ function App() {
                   </>
                 }
               />
-              <Route exact path="/Jadwal" element={<Jadwal />} />
-              <Route exact path="/Profil/:id" element={<Profil />} />
+              <Route
+                exact
+                path="/Jadwal"
+                element={
+                  <>
+                    <Sidebar userId={userId} />
+                    <Jadwal />
+                  </>
+                }
+              />
+              <Route
+                exact
+                path="/Profil/:id"
+                element={
+                  <>
+                    <Sidebar userId={userId} />
+                    <Profil />
+                  </>
+                }
+              />
             </Routes>
           </Router>
         </div>

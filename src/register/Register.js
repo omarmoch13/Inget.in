@@ -96,6 +96,9 @@ export default function Register() {
               {error && <div className="error_msg">{error}</div>}
               <div className="button-login">
                 <button className="button-regis">Buat Akun</button>
+                <a className="button-ya" href="/Login">
+                  sudah punya akun? masuk
+                </a>
               </div>
             </form>
           </div>

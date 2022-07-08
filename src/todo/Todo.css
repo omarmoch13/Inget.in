@@ -107,3 +107,8 @@
   margin-right: 2%;
   margin-left: 2%;
 }
+.inside {
+  display: flex;
+  flex-direction: row;
+  row-gap: 5%;
+}
