@@ -60,11 +60,6 @@ function App() {
                     path="/Register"
                     element={<Register />}
                   />
-                  <Route
-                    exact
-                    path="/"
-                    element={<Navigate replace to="/Login" />}
-                  />
                 </>
               )}
               <Route
