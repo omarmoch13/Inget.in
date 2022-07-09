@@ -52,33 +52,32 @@ function App() {
                 <>
                   <Route
                     exact
-                    path="/Kalender"
-                    element={
-                      <>
-                        {" "}
-                        <Sidebar userId={userId} />
-                        <div className=" h-screen flex flex-col flex-1">
-                          <CalendarHeader />
-                          <Month month={currenMonth} />
-                        </div>
-                      </>
-                    }
+                    path="/"
+                    element={<Login setUserId={setUserId} />}
                   />
                 </>
               )}
-
               <Route
                 exact
-                path="/"
-                element={<Login setUserId={setUserId} />}
+                path="/Kalender"
+                element={
+                  <>
+                    {" "}
+                    <Sidebar userId={userId} />
+                    <div className=" h-screen flex flex-col flex-1">
+                      <CalendarHeader />
+                      <Month month={currenMonth} />
+                    </div>
+                  </>
+                }
               />
 
               <Route exact path="/Register" element={<Register />} />
-              <Route
+              {/* <Route
                 exact
                 path="/"
                 element={<Navigate replace to="/Login" />}
-              />
+              /> */}
               <Route
                 exact
                 path="/Todo"
