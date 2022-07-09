@@ -100,7 +100,7 @@ const Profil = ({ setLoading }) => {
             <ajudul>PROFILE</ajudul>
           </div>
           <div className="button-logout">
-            <Link to={"/Login"}>
+            <Link to={"/"}>
               <akeluar>Keluar</akeluar>
             </Link>
           </div>

@@ -52,7 +52,7 @@ function App() {
                 <>
                   <Route
                     exact
-                    path="/"
+                    path="/Kalender"
                     element={
                       <>
                         {" "}
@@ -69,7 +69,7 @@ function App() {
 
               <Route
                 exact
-                path="/Login"
+                path="/"
                 element={<Login setUserId={setUserId} />}
               />
 

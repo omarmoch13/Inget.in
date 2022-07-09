@@ -28,7 +28,7 @@ export default function Register() {
     try {
       const url = "https://inget.herokuapp.com/api/users";
       const { data: res } = await axios.post(url, data);
-      navigate("/Login");
+      navigate("/");
       console.log(res.message);
     } catch (error) {
       if (
@@ -96,7 +96,7 @@ export default function Register() {
               {error && <div className="error_msg">{error}</div>}
               <div className="button-login">
                 <button className="button-regis">Buat Akun</button>
-                <a className="button-ya" href="/Login">
+                <a className="button-ya" href="/">
                   sudah punya akun? masuk
                 </a>
               </div>
