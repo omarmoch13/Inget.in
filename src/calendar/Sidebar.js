@@ -29,7 +29,7 @@ export default function Sidebar({ userId }) {
             </a>
           </div>
           <div className="calendar-logo">
-            <a href="/">
+            <a href="/Kalender">
               <BsCalendarDate
                 color="white"
                 style={{ fontSize: "2em" }}
