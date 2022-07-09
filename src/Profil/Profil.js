@@ -28,7 +28,7 @@ const Profil = ({ setLoading }) => {
       type: types,
     };
     const response = await axios.patch(
-      `http://localhost:4000/api/profil/${params.id}`,
+      `https://inget.herokuapp.com/api/profil/${params.id}`,
       body,
       {
         headers: {
@@ -43,7 +43,7 @@ const Profil = ({ setLoading }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/profil/${params.id}`
+          `https://inget.herokuapp.com/api/profil/${params.id}`
         );
         await setData(response.data.data);
         setImgPreview(response.data.data.foto);

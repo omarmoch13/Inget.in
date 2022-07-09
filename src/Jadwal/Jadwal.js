@@ -21,7 +21,7 @@ const Jadwal = () => {
     };
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/jadwal/${localStorage.getItem(
+        `https://inget.herokuapp.com/api/jadwal/${localStorage.getItem(
           "id"
         )}`,
         body
@@ -45,7 +45,7 @@ const Jadwal = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/jadwal/${localStorage.getItem(
+        `https://inget.herokuapp.com/api/jadwal/${localStorage.getItem(
           "id"
         )}`,
         body
@@ -60,7 +60,7 @@ const Jadwal = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/jadwal/${localStorage.getItem(
+          `https://inget.herokuapp.com/api/jadwal/${localStorage.getItem(
             "id"
           )}`
         );

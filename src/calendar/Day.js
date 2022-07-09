@@ -15,7 +15,7 @@ export default function Day({ day, rowIdx }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:4000/api/kalender";
+      const url = "https://inget.herokuapp.com/api/kalender";
       const { data: res } = await axios.post(url, data);
       console.log(res.data);
     } catch (error) {

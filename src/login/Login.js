@@ -14,7 +14,7 @@ export default function Login({ setUserId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:4000/api/auth";
+      const url = "https://inget.herokuapp.com/api/auth";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("id", res.data.id);

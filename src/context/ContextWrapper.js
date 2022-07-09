@@ -33,14 +33,14 @@ async function initEvents() {
   // const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
   let parsedEvents = [];
   // const fetchData = async () => {
-  //   const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+  //   const url = `https://inget.herokuapp.com/api/kalender/${localStorage.getItem(
   //     "id"
   //   )}`;
   //   const response = await axios.get(url);
   //   parsedEvents = response.data.dataKalender;
   // };
   // fetchData();
-  const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+  const url = `https://inget.herokuapp.com/api/kalender/${localStorage.getItem(
     "id"
   )}`;
   const response = await axios.get(url);
@@ -62,7 +62,7 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+      const url = `https://inget.herokuapp.com/api/kalender/${localStorage.getItem(
         "id"
       )}`;
       const response = await axios.get(url);
@@ -90,7 +90,7 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `http://localhost:4000/api/kalender/${localStorage.getItem(
+      const url = `https://inget.herokuapp.com/api/kalender/${localStorage.getItem(
         "id"
       )}`;
       let body = { dataKalender: savedEvents };

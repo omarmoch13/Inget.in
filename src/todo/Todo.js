@@ -32,7 +32,9 @@ function Todo() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:4000/api/todo/${localStorage.getItem("id")}`
+        `https://inget.herokuapp.com/api/todo/${localStorage.getItem(
+          "id"
+        )}`
       );
       if (
         response.data.list != undefined ||
@@ -81,7 +83,7 @@ function Todo() {
       return prev;
     });
     try {
-      const url = `http://localhost:4000/api/todo/${localStorage.getItem(
+      const url = `https://inget.herokuapp.com/api/todo/${localStorage.getItem(
         "id"
       )}`;
       await axios.post(url, { list: state });
@@ -101,7 +103,7 @@ function Todo() {
     state[key].items = removedData;
     setState(state);
     try {
-      const url = `http://localhost:4000/api/todo/${localStorage.getItem(
+      const url = `https://inget.herokuapp.com/api/todo/${localStorage.getItem(
         "id"
       )}`;
       await axios.post(url, { list: state });
@@ -137,7 +139,7 @@ function Todo() {
     console.log(state);
 
     try {
-      const url = `http://localhost:4000/api/todo/${localStorage.getItem(
+      const url = `https://inget.herokuapp.com/api/todo/${localStorage.getItem(
         "id"
       )}`;
       await axios.post(url, { list: state });

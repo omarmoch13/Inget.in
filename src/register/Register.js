@@ -26,7 +26,7 @@ export default function Register() {
     e.preventDefault();
     console.log(data);
     try {
-      const url = "http://localhost:4000/api/users";
+      const url = "https://inget.herokuapp.com/api/users";
       const { data: res } = await axios.post(url, data);
       navigate("/Login");
       console.log(res.message);
