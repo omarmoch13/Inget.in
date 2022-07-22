@@ -33,7 +33,7 @@ export default function Login({ setUserId }) {
     <div className="container-login">
       <div className="container-wrap-login">
         <div className="text-login">
-          <alogin>Inget.in</alogin>
+          <alogin2>Inget.in</alogin2>
         </div>
         <div className="container-wrapper-login">
           <div className="text-login2">
@@ -41,7 +41,6 @@ export default function Login({ setUserId }) {
           </div>
           <div className="textfield-login">
             <form onSubmit={handleSubmit}>
-              <br></br>
               <input
                 onChange={handleChange}
                 value={data.username}
@@ -49,7 +48,7 @@ export default function Login({ setUserId }) {
                 placeholder="username"
                 type="text"
                 name="username"
-                className="input-Email"
+                className="input-password"
               />
 
               <br></br>

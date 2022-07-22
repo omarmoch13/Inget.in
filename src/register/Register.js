@@ -45,7 +45,7 @@ export default function Register() {
     <div className="container-login">
       <div className="container-wrap-login">
         <div className="text-login">
-          <alogin>Inget.in</alogin>
+          <alogin1>Inget.in</alogin1>
         </div>
         <div className="container-wrapper-login">
           <div className="text-login2">
@@ -60,7 +60,7 @@ export default function Register() {
                 placeholder="username"
                 type="text"
                 name="username"
-                className="input-Email"
+                className="input-password"
               />
               <br></br>
               <input
@@ -70,7 +70,7 @@ export default function Register() {
                 placeholder="name"
                 type="text"
                 name="name"
-                className="input-Email"
+                className="input-password"
               />
               <br></br>
               <input
@@ -80,7 +80,7 @@ export default function Register() {
                 placeholder="Email"
                 type="text"
                 name="email"
-                className="input-username"
+                className="input-password"
               />
 
               <br></br>
