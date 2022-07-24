@@ -58,11 +58,16 @@ export class Main extends Component {
           aria-labelledby="example-modal-sizes-title-lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg">
+            <Modal.Title
+              id="example-modal-sizes-title-lg"
+              style={{ wordBreak: "break-word" }}
+            >
               {activeItem?.title}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>{activeItem?.text}</Modal.Body>
+          <Modal.Body style={{ wordBreak: "break-word" }}>
+            {activeItem?.text}{" "}
+          </Modal.Body>
           <Modal.Footer>{activeItem?.date}</Modal.Footer>
         </Modal>
       </div>
